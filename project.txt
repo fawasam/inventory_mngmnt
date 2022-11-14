@@ -1,0 +1,46 @@
+FRONTEND  - REACT & SCSS 
+BACKEND   -NODEJS & EXPRESS
+STATE MANAGEMENT REDUX TOOLKIT
+IMAGE STORAGE CLOUDINARY
+EMAIL -NODEMAILER & OUTLOOK 
+FRONTEND DEPLOY -VERCEL
+BACKEND DEPLOY -RENDER
+
+
+------ Pinvent App - Timeline -------
+00:00:00 - Promo Intro
+00:01:37 - Pinvent App Demo
+00:18:58 - Planning the Project
+00:23:18 - Project Setup
+00:29:34 - Create Server and Connect MongoDB
+00:43:50 - Create Folders and Home Route
+00:55:54 - Create User Model
+01:11:08 - Create User Route
+01:16:34 - Create User Controller
+01:21:37 - Create Custom Error Handler
+01:34:48 - Register New User
+01:54:25 - Encrypt Password - Method 1
+02:03:53 - Encrypt Password - Method 2
+02:13:04 - Generate JSON Web Token
+02:23:46 - Send Token With HTTP-Only cookie
+02:34:26 - Create Login Route
+02:38:15 - Create Login Controller Function
+02:50:58 - Logout User
+02:57:33 - Create User Profile Route
+03:03:07 - Create Protect MiddleWare and UserProfile Controller
+03:16:16 - Create Route to Get Login Status
+03:20:26 - Create  Login Status Controller Function
+03:23:41 - Create  Route to Update User
+03:28:23 - Create  Update User Controller Function
+03:39:24 - Create  Route to Change Password
+03:43:06 - Create  Controller Function to Change Password
+03:52:06 - Reset Password Process
+03:56:55 - Create Forgot Password Route
+04:00:48 - Create Token Model
+04:06:52 - Create send Email Function
+04:22:10 - Forgot Password Controller Function - Part 1
+04:33:39 - Forgot Password Controller Function - Part 2
+04:44:07 - Forgot Password Controller Function - Part 3
+04:59:08 - Email not delivered
+05:01:59 - Create Reset Password Route
+05:05:52 - Create Reset Password Controller
