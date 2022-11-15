@@ -120,7 +120,7 @@ const login = asyncHandler(async (req, res) => {
 });
 
 // @desc      Logout user
-// @route     POST /api/v1/auth/logout
+// @route     GET /api/v1/auth/logout
 // @access    Public
 
 const logout = asyncHandler(async (req, res) => {
@@ -135,7 +135,7 @@ const logout = asyncHandler(async (req, res) => {
 });
 
 // @desc      Get user
-// @route     POST /api/v1/auth/getuser
+// @route     GET /api/v1/auth/getuser
 // @access    Public
 
 const getUser = asyncHandler(async (req, res) => {
@@ -158,7 +158,7 @@ const getUser = asyncHandler(async (req, res) => {
 });
 
 // @desc      Get loggin status
-// @route     POST /api/v1/auth/loggedin
+// @route     GET /api/v1/auth/loggedin
 // @access    Public
 
 const loginStatus = asyncHandler(async (req, res) => {
@@ -174,10 +174,41 @@ const loginStatus = asyncHandler(async (req, res) => {
   return res.json(false);
 });
 
+// @desc      Update User
+// @route     PUT /api/v1/auth/updateUser
+// @access    Public
+
+const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    const { name, email, photo, phone, bio } = user;
+    user.email = email;
+    user.name = req.body.name || name;
+    user.phone = req.body.phone || phone;
+    user.bio = req.body.bio || bio;
+    user.photo = req.body.photo || photo;
+
+    const updatedUser = await user.save();
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      photo: updatedUser.photo,
+      phone: updatedUser.phone,
+      bio: updatedUser.bio,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
 module.exports = {
   register,
   login,
   logout,
   getUser,
   loginStatus,
+  updateUser,
 };
