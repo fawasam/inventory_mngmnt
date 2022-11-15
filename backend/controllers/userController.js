@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const generateToken = require("../utils/token");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // @desc      Register user
 // @route     POST /api/v1/auth/register
@@ -156,9 +157,27 @@ const getUser = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc      Get loggin status
+// @route     POST /api/v1/auth/loggedin
+// @access    Public
+
+const loginStatus = asyncHandler(async (req, res) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.json(false);
+  }
+  // Verify Token
+  const verified = jwt.verify(token, process.env.JWT_SECRET);
+  if (verified) {
+    return res.json(true);
+  }
+  return res.json(false);
+});
+
 module.exports = {
   register,
   login,
   logout,
   getUser,
+  loginStatus,
 };
