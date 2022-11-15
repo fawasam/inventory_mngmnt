@@ -8,21 +8,21 @@ BACKEND DEPLOY -RENDER
 
 
 ------ Pinvent App - Timeline -------
-00:00:00 - Promo Intro
-00:01:37 - Pinvent App Demo
-00:18:58 - Planning the Project
-00:23:18 - Project Setup
-00:29:34 - Create Server and Connect MongoDB
-00:43:50 - Create Folders and Home Route
-00:55:54 - Create User Model
-01:11:08 - Create User Route
-01:16:34 - Create User Controller
-01:21:37 - Create Custom Error Handler
-01:34:48 - Register New User
-01:54:25 - Encrypt Password - Method 1
-02:03:53 - Encrypt Password - Method 2
-02:13:04 - Generate JSON Web Token
-02:23:46 - Send Token With HTTP-Only cookie
+00:00:00 - Promo Intro✅
+00:01:37 - Pinvent App Demo✅
+00:18:58 - Planning the Project✅
+00:23:18 - Project Setup✅
+00:29:34 - Create Server and Connect MongoDB✅
+00:43:50 - Create Folders and Home Route✅
+00:55:54 - Create User Model✅
+01:11:08 - Create User Route✅
+01:16:34 - Create User Controller✅
+01:21:37 - Create Custom Error Handler✅
+01:34:48 - Register New User✅
+01:54:25 - Encrypt Password - Method 1✅
+02:03:53 - Encrypt Password - Method 2✅
+02:13:04 - Generate JSON Web Token ✅
+02:23:46 - Send Token With HTTP-Only cookie ✅
 02:34:26 - Create Login Route
 02:38:15 - Create Login Controller Function
 02:50:58 - Logout User

@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
 const dotenv = require("dotenv").config();
+const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRoute");
 const errorHandler = require("./middleware/errorMiddleware");
 
@@ -18,6 +19,7 @@ app.use(errorHandler);
 
 //middleware
 app.use(express.json());
+app.use(cookieParser());
 app.unsubscribe(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

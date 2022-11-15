@@ -1,7 +1,8 @@
 //it avoid try catch block
 const asyncHandler = require("express-async-handler");
-
 const User = require("../models/userModel");
+const generateToken = require("../utils/token");
+const bcrypt = require("bcryptjs");
 
 // @desc      Register user
 // @route     POST /api/v1/auth/register
@@ -35,6 +36,18 @@ const register = asyncHandler(async (req, res) => {
     password,
   });
 
+  // Generate token
+  const token = generateToken(user._id);
+
+  //send HTTP-only cookie
+  res.cookie("token", token, {
+    path: "/",
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000 * 86400), //1 day
+    sameSite: "none",
+    secure: true,
+  });
+
   if (user) {
     const { _id, name, email, photo, phone, bio } = user;
     res.status(201).json({
@@ -44,7 +57,7 @@ const register = asyncHandler(async (req, res) => {
       photo,
       phone,
       bio,
-      // token,
+      token,
     });
   } else {
     res.status(400);
@@ -52,6 +65,76 @@ const register = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc      Login user
+// @route     POST /api/v1/auth/login
+// @access    Public
+
+const login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  // Validate Request
+  if (!email || !password) {
+    res.status(400);
+    throw new Error("Please add email and password");
+  }
+
+  // Check if user exists
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(400);
+    throw new Error("User not found, please signup");
+  }
+
+  // User exists, check if password is correct
+  const passwordIsCorrect = await bcrypt.compare(password, user.password);
+
+  //   Generate Token
+  const token = generateToken(user._id);
+
+  // Send HTTP-only cookie
+  res.cookie("token", token, {
+    path: "/",
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000 * 86400), // 1 day
+    sameSite: "none",
+    secure: true,
+  });
+
+  if (user && passwordIsCorrect) {
+    const { _id, name, email, photo, phone, bio } = user;
+    res.status(200).json({
+      _id,
+      name,
+      email,
+      photo,
+      phone,
+      bio,
+      token,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid email or password");
+  }
+});
+
+// @desc      Logout user
+// @route     POST /api/v1/auth/logout
+// @access    Public
+
+const logout = asyncHandler(async (req, res) => {
+  res.cookie("token", "", {
+    path: "/",
+    httpOnly: true,
+    expires: new Date(0),
+    sameSite: "none",
+    secure: true,
+  });
+  return res.status(200).json({ message: "Successfully Logged Out" });
+});
+
 module.exports = {
   register,
+  login,
+  logout,
 };
