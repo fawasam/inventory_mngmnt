@@ -1,6 +1,6 @@
 //it avoid try catch block
 const asyncHandler = require("express-async-handler");
-const bcrypt = require("bcryptjs");
+
 const User = require("../models/userModel");
 
 // @desc      Register user
